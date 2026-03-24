@@ -20,7 +20,7 @@ const LEVELS = [
         num: 1,
         title: "Primeira Travessia",
         description: "Abra caminho para o carro principal atravessar os espaços livres.",
-        target: { x: 5, y: 3 }, // Grid coords
+        target: { x: 5, y: 3 },
         zecaMessage: "Mova os veículos no seu eixo para abrir caminho ao Carro Vermelho!",
         event: { id: 'normal', title: 'Fluxo Normal', desc: 'Dia ensolarado. Tráfego padrão.', icon: 'ri-sun-line' },
         pieces: [
@@ -57,6 +57,37 @@ const LEVELS = [
             { id: 'deb2', type: 'debris', x: 3, y: 3, orient: 'V', size: 1, color: 'linear-gradient(135deg, #444, #666)' },
             { id: 'car5', type: 'car', x: 2, y: 0, orient: 'V', size: 2, color: 'linear-gradient(135deg, #FF0099, #493240)' },
             { id: 'car6', type: 'car', x: 4, y: 4, orient: 'H', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' }
+        ]
+    },
+    {
+        num: 4,
+        title: "O Grande Nó",
+        description: "Desfaça o bloqueio cíclico de múltiplos veículos.",
+        target: { x: 5, y: 3 },
+        zecaMessage: "Vários carros se bloqueando em círculo. Mova o azul primeiro!",
+        event: { id: 'normal', title: 'Fluxo Normal', desc: 'Dia ensolarado. Tráfego padrão.', icon: 'ri-sun-line' },
+        pieces: [
+            { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+            { id: 'car1_4', type: 'car', x: 2, y: 2, orient: 'V', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' },
+            { id: 'car2_4', type: 'car', x: 2, y: 1, orient: 'H', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' },
+            { id: 'car3_4', type: 'car', x: 4, y: 0, orient: 'V', size: 2, color: 'linear-gradient(135deg, #FF0099, #493240)' },
+            { id: 'car4_4', type: 'car', x: 3, y: 2, orient: 'V', size: 3, color: 'linear-gradient(135deg, #F00000, #DC281E)' },
+            { id: 'car5_4', type: 'car', x: 1, y: 4, orient: 'H', size: 2, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' }
+        ]
+    },
+    {
+        num: 5,
+        title: "Engarrafamento Extremo",
+        description: "O tráfego de ônibus exige rearranjos complexos.",
+        target: { x: 5, y: 2 },
+        zecaMessage: "Dois comboios de ônibus bloqueados! Planeje seus movimentos.",
+        event: { id: 'rain', title: 'Dia de Chuva', desc: 'Pista escorregadia. Distância de segurança dobrada!', icon: 'ri-rainy-line' },
+        pieces: [
+            { id: 'main_car', type: 'car', x: 0, y: 2, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+            { id: 'bus1_5', type: 'bus', x: 2, y: 0, orient: 'V', size: 3, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
+            { id: 'bus2_5', type: 'bus', x: 3, y: 1, orient: 'V', size: 3, color: 'linear-gradient(135deg, #ffbb00, #ff8c00)' },
+            { id: 'car1_5', type: 'car', x: 1, y: 3, orient: 'H', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' },
+            { id: 'car2_5', type: 'car', x: 3, y: 4, orient: 'H', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' }
         ]
     }
 ];
