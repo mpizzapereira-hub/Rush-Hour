@@ -19,28 +19,28 @@ const LEVELS = [
     {
         num: 1,
         title: "Primeira Travessia",
-        description: "Abra caminho para o pedestre utilizando os espaços livres.",
+        description: "Abra caminho para o carro principal atravessar os espaços livres.",
         target: { x: 5, y: 3 }, // Grid coords
-        zecaMessage: "Mova os carros para abrir caminho. Atenção: deixe espaço de segurança à frente e atrás do carro!",
+        zecaMessage: "Mova os veículos no seu eixo para abrir caminho ao Carro Vermelho!",
         event: { id: 'normal', title: 'Fluxo Normal', desc: 'Dia ensolarado. Tráfego padrão.', icon: 'ri-sun-line' },
         pieces: [
-            { id: 'ped1', type: 'pedestrian', x: 0, y: 3, size: 1, isMain: true },
-            { id: 'car1', type: 'car', x: 2, y: 1, orient: 'V', size: 2, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)', icon: 'ri-walk-line' },
-            { id: 'car2', type: 'car', x: 3, y: 3, orient: 'V', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' }
+            { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+            { id: 'car1', type: 'car', x: 2, y: 1, orient: 'V', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' },
+            { id: 'car2', type: 'car', x: 3, y: 3, orient: 'V', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' }
         ]
     },
     {
         num: 2,
         title: "Desafio do Ônibus",
         description: "O fluxo coletivo exige mais espaço e paciência.",
-        target: { x: 3, y: 5 },
-        zecaMessage: "Abra caminho para o pedestre cruzando a rota do ônibus!",
+        target: { x: 5, y: 2 },
+        zecaMessage: "Abra caminho para o carro principal deslizando o ônibus!",
         event: { id: 'rain', title: 'Dia de Chuva', desc: 'Pista escorregadia. Distância de segurança dobrada!', icon: 'ri-rainy-line' },
         pieces: [
-            { id: 'ped3', type: 'pedestrian', x: 0, y: 3, size: 1, isMain: true },
-            { id: 'bus1', type: 'bus', x: 3, y: 1, orient: 'V', size: 3, isMain: false, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
-            { id: 'car3', type: 'car', x: 1, y: 3, orient: 'H', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' },
-            { id: 'car4', type: 'car', x: 3, y: 4, orient: 'H', size: 2, color: 'linear-gradient(135deg, #F00000, #DC281E)' }
+            { id: 'main_car', type: 'car', x: 0, y: 2, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+            { id: 'bus1', type: 'bus', x: 3, y: 0, orient: 'V', size: 3, isMain: false, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
+            { id: 'car3', type: 'car', x: 2, y: 3, orient: 'H', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' },
+            { id: 'car4', type: 'car', x: 3, y: 4, orient: 'H', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' }
         ]
     },
     {
@@ -48,15 +48,15 @@ const LEVELS = [
         title: "Operação Pista Limpa",
         description: "Reestabeleça a conexão da via movendo os entulhos.",
         target: { x: 5, y: 3 },
-        zecaMessage: "Epa! Estrada interrompida! Pedestres e ciclistas passam pela ponte holográfica, mas carros estão bloqueados.",
+        zecaMessage: "Remova os entulhos da fenda para restaurar o fluxo livre ao seu Carro!",
         event: { id: 'maintenance', title: 'Pista Limpa', desc: 'Reparo na pista. Proibido parar na junção.', icon: 'ri-hammer-line' },
         isBroken: true,
         pieces: [
-            { id: 'ped2', type: 'pedestrian', x: 0, y: 2, size: 1, isMain: true },
-            { id: 'deb1', type: 'debris', x: 2, y: 2, size: 1, color: 'linear-gradient(135deg, #444, #666)' },
+            { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+            { id: 'deb1', type: 'debris', x: 2, y: 3, size: 1, color: 'linear-gradient(135deg, #444, #666)' },
             { id: 'deb2', type: 'debris', x: 3, y: 3, size: 1, color: 'linear-gradient(135deg, #444, #666)' },
             { id: 'car5', type: 'car', x: 2, y: 0, orient: 'V', size: 2, color: 'linear-gradient(135deg, #FF0099, #493240)' },
-            { id: 'car6', type: 'car', x: 3, y: 4, orient: 'H', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' }
+            { id: 'car6', type: 'car', x: 4, y: 4, orient: 'H', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' }
         ]
     }
 ];
