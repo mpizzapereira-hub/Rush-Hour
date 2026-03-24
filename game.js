@@ -131,10 +131,10 @@ function renderGridBackground() {
             }
 
             if (lvl && lvl.target.x === c && lvl.target.y === r) {
-                cell.style.background = 'rgba(0, 255, 136, 0.15)';
-                cell.style.borderColor = 'var(--neon-green)';
-                cell.style.borderStyle = 'solid';
-                cell.innerHTML = '<i class="ri-flag-2-line" style="color:var(--neon-green); font-size: 1.2rem; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>';
+                cell.style.background = 'rgba(0, 255, 136, 0.05)';
+                cell.style.borderRight = '1px dashed var(--neon-green)';
+                cell.style.borderLeft = '1px solid rgba(255,255,255,0.05)';
+                cell.innerHTML = '<i class="ri-arrow-right-line" style="color:var(--neon-green); font-size: 1.5rem; position: absolute; right: -12px; top: 50%; transform: translateY(-50%); text-shadow: 0 0 10px var(--neon-green);"></i>';
             }
             gridContainer.appendChild(cell);
         }
@@ -228,7 +228,15 @@ function dragMove(e) {
     }
 
     // Border constraints
-    targetX = Math.max(0, Math.min(GRID_SIZE - (p.orient === 'H' ? p.size : 1), targetX));
+    const lvl = LEVELS.find(l => l.num === gameState.level);
+    let maxX = GRID_SIZE - (p.orient === 'H' ? p.size : 1);
+    const isExitRow = lvl && p.isMain && p.orient === 'H' && p.y === lvl.target.y;
+    
+    if (isExitRow) {
+        maxX = GRID_SIZE; // slide off rightwards!
+    }
+
+    targetX = Math.max(0, Math.min(maxX, targetX));
     targetY = Math.max(0, Math.min(GRID_SIZE - (p.orient === 'V' ? p.size : 1), targetY));
 
     // Continuous visual update
@@ -486,7 +494,7 @@ function checkWinCondition() {
     const mainPiece = gameState.pieces.find(p => p.isMain);
     if (!mainPiece) return;
 
-    if (mainPiece.x === lvl.target.x && mainPiece.y === lvl.target.y) {
+    if (mainPiece.x >= GRID_SIZE - 1) { // reached boundary or going out
         showWinModal();
     }
 }
