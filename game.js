@@ -494,7 +494,7 @@ function checkWinCondition() {
     const mainPiece = gameState.pieces.find(p => p.isMain);
     if (!mainPiece) return;
 
-    if (mainPiece.x >= GRID_SIZE - 1) { // reached boundary or going out
+    if (mainPiece.x >= 4) { // Front sits at index 5, hitting exit Gate frame
         showWinModal();
     }
 }
