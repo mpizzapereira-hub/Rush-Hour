@@ -34,10 +34,11 @@ const LEVELS = [
         title: "Desafio do Ônibus",
         description: "O fluxo coletivo exige mais espaço e paciência.",
         target: { x: 3, y: 5 },
-        zecaMessage: "O ônibus responde por 40 pessoas! Prioridade máxima na travessia.",
+        zecaMessage: "Abra caminho para o pedestre cruzando a rota do ônibus!",
         event: { id: 'rain', title: 'Dia de Chuva', desc: 'Pista escorregadia. Distância de segurança dobrada!', icon: 'ri-rainy-line' },
         pieces: [
-            { id: 'bus1', type: 'bus', x: 3, y: 1, orient: 'V', size: 3, isMain: true, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
+            { id: 'ped3', type: 'pedestrian', x: 0, y: 3, size: 1, isMain: true },
+            { id: 'bus1', type: 'bus', x: 3, y: 1, orient: 'V', size: 3, isMain: false, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
             { id: 'car3', type: 'car', x: 1, y: 3, orient: 'H', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' },
             { id: 'car4', type: 'car', x: 3, y: 4, orient: 'H', size: 2, color: 'linear-gradient(135deg, #F00000, #DC281E)' }
         ]
@@ -493,7 +494,7 @@ function checkWinCondition() {
 function showWinModal() {
     overlayEl.style.display = 'flex';
     modalTitleEl.textContent = "Fase Concluída!";
-    modalDescEl.textContent = `Você guiou ${gameState.level === 2 ? 'o Ônibus' : 'o Pedestre'} com empatia.`;
+    modalDescEl.textContent = "Você guiou o Pedestre com empatia.";
     
     let starCount = 1;
     if (gameState.empathy > 80) starCount = 3;
