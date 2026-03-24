@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluxo Vital: O Enigma da Travessia</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Remix Icon for UI icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome or similar not strictly needed if Remix Icons covers it -->
+</head>
+<body>
+    <!-- Background Glows -->
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <div class="app-container">
+        <!-- Main Game Area -->
+        <main class="game-view">
+            <!-- Game Board Container -->
+            <div class="board-container Glass">
+                <div class="board-header">
+                    <div class="level-indicator">
+                        <span class="label">NÍVEL</span>
+                        <span class="value" id="level-number">01</span>
+                    </div>
+                    <div class="score-stars" id="star-rating">
+                        <i class="ri-star-fill active"></i>
+                        <i class="ri-star-fill active"></i>
+                        <i class="ri-star-fill active"></i>
+                    </div>
+                </div>
+
+                <div class="grid-wrapper">
+                    <!-- Grid 6x6 -->
+                    <div class="traffic-grid" id="game-grid">
+                        <!-- Cells injected by JS -->
+                    </div>
+                </div>
+
+                <div class="board-footer">
+                    <div class="footer-stat">
+                        <i class="ri-footprint-line"></i>
+                        <div class="stat-text">
+                            <span class="label">Movimentos</span>
+                            <span class="value" id="move-count">0</span>
+                        </div>
+                    </div>
+                    <div class="footer-stat">
+                        <i class="ri-heart-pulse-line"></i>
+                        <div class="stat-text">
+                            <span class="label">Empatia</span>
+                            <span class="value" id="empathy-score">100%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Card Section -->
+            <div class="event-section Glass">
+                <div class="section-title">
+                    <i class="ri-git-merge-line"></i>
+                    <span>Carta de Evento</span>
+                </div>
+                <div class="event-card" id="active-event">
+                    <div class="event-icon" id="event-icon">
+                        <i class="ri-sun-line"></i>
+                    </div>
+                    <div class="event-info">
+                        <h3 id="event-title">Fluxo Normal</h3>
+                        <p id="event-desc">Dia ensolarado. Tráfego padrão sem modificadores de stress.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Sidebar Setup -->
+        <aside class="sidebar Glass">
+            <!-- Zeca Farol Widget -->
+            <div class="zeca-widget">
+                <div class="zeca-avatar-container">
+                    <div class="zeca-halo"></div>
+                    <div class="zeca-avatar" id="zeca-visual">
+                        <!-- Custom CSS Character or Image -->
+                        <div class="robot-face">
+                            <div class="led-eyes">
+                                <span class="eye left"></span>
+                                <span class="eye right"></span>
+                            </div>
+                            <div class="light-bar">
+                                <span class="light red"></span>
+                                <span class="light yellow"></span>
+                                <span class="light green active"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="zeca-dialogue Glass">
+                    <p id="zeca-message">Bem-vindo, condutor de empatia! Nosso objetivo é guiar todos em segurança.</p>
+                </div>
+            </div>
+
+            <!-- Stress Meter Widget -->
+            <div class="stress-widget Glass">
+                <div class="widget-header">
+                    <span>Métrica de Stress</span>
+                    <span id="stress-value" class="state-fine">0%</span>
+                </div>
+                <div class="stress-bar-wrapper">
+                    <div class="stress-bar" id="stress-progress" style="width: 0%"></div>
+                    <div class="stress-markers">
+                        <span class="marker warning">50%</span>
+                        <span class="marker critical">90%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Controls -->
+            <div class="controls-widget">
+                <button class="btn btn-primary" id="start-btn">
+                    <i class="ri-play-fill"></i> Iniciar Jornada
+                </button>
+                <button class="btn btn-secondary" id="restart-btn">
+                    <i class="ri-restart-line"></i> Reiniciar Fase
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Modals (Level Complete, Game Over) -->
+    <div class="overlay" id="game-overlay" style="display: none;">
+        <div class="modal Glass">
+            <div class="modal-icon" id="modal-icon">
+                <i class="ri-checkbox-circle-line"></i>
+            </div>
+            <h2 id="modal-title">Fase Concluída!</h2>
+            <p id="modal-desc">Você guiou o pedestre com total empatia.</p>
+            <div class="modal-stars" id="modal-stars">
+                <!-- Injected icons -->
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="modal-action-btn">Próxima Fase</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
