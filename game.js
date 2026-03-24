@@ -496,6 +496,17 @@ function checkWinCondition() {
 
     if (mainPiece.x + mainPiece.size - 1 >= lvl.target.x && mainPiece.y === lvl.target.y) { // reached target grid cell
         showWinModal();
+        
+        // Auto-advance level after 1.5 seconds without needing to click
+        setTimeout(() => {
+            overlayEl.style.display = 'none';
+            if (gameState.level < LEVELS.length) {
+                gameState.level++;
+            } else {
+                gameState.level = 1;
+            }
+            loadLevel(gameState.level);
+        }, 1500);
     }
 }
 
