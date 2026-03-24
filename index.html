@@ -770,8 +770,8 @@ const LEVELS = [
         isBroken: true,
         pieces: [
             { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
-            { id: 'deb1', type: 'debris', x: 2, y: 3, size: 1, color: 'linear-gradient(135deg, #444, #666)' },
-            { id: 'deb2', type: 'debris', x: 3, y: 3, size: 1, color: 'linear-gradient(135deg, #444, #666)' },
+            { id: 'deb1', type: 'debris', x: 2, y: 3, orient: 'V', size: 1, color: 'linear-gradient(135deg, #444, #666)' },
+            { id: 'deb2', type: 'debris', x: 3, y: 3, orient: 'V', size: 1, color: 'linear-gradient(135deg, #444, #666)' },
             { id: 'car5', type: 'car', x: 2, y: 0, orient: 'V', size: 2, color: 'linear-gradient(135deg, #FF0099, #493240)' },
             { id: 'car6', type: 'car', x: 4, y: 4, orient: 'H', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' }
         ]
@@ -935,7 +935,7 @@ function dragMove(e) {
     let targetY = gameState.initialPiecePos.y;
 
     // Constrain by Axis for vehicles
-    if (p.type === 'pedestrian' || p.type === 'cyclist' || p.type === 'debris') {
+    if (p.type === 'pedestrian' || p.type === 'cyclist') {
         targetX = gameState.initialPiecePos.x + moveX;
         targetY = gameState.initialPiecePos.y + moveY;
     } else if (p.orient === 'H') {
