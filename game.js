@@ -214,11 +214,47 @@ function renderPieces() {
 function startDrag(e, piece) {
     e.preventDefault();
     gameState.selectedPiece = piece;
-    const clientX = e.clientX || e.touches[0].clientX;
-    const clientY = e.clientY || e.touches[0].clientY;
+    const clientX = e.clientX || (e.touches ? e.touches[0].clientX : 0);
+    const clientY = e.clientY || (e.touches ? e.touches[0].clientY : 0);
     
     gameState.dragStart = { x: clientX, y: clientY };
     gameState.initialPiecePos = { x: piece.x, y: piece.y };
+
+    let minX = 0;
+    let maxX = GRID_SIZE - (piece.orient === 'H' ? piece.size : 1);
+    let minY = 0;
+    let maxY = GRID_SIZE - (piece.orient === 'V' ? piece.size : 1);
+
+    const lvl = LEVELS.find(l => l.num === gameState.level);
+    if (lvl && piece.isMain && piece.orient === 'H' && piece.y === lvl.target.y) {
+        maxX = GRID_SIZE; // slide off rightwards!
+    }
+
+    gameState.pieces.forEach(o => {
+        if (o.id === piece.id) return;
+
+        const p1Y = piece.y;
+        const p1H = piece.orient === 'V' ? piece.size : 1;
+        const p2Y = o.y;
+        const p2H = o.orient === 'V' ? o.size : 1;
+        const intersectY = (p1Y < p2Y + p2H && p1Y + p1H > p2Y);
+
+        const p1X = piece.x;
+        const p1W = piece.orient === 'H' ? piece.size : 1;
+        const p2X = o.x;
+        const p2W = o.orient === 'H' ? o.size : 1;
+        const intersectX = (p1X < p2X + p2W && p1X + p1W > p2X);
+
+        if (piece.orient === 'H' && intersectY) {
+            if (o.x < piece.x) minX = Math.max(minX, o.x + p2W);
+            if (o.x > piece.x) maxX = Math.min(maxX, o.x - piece.size);
+        } else if (piece.orient === 'V' && intersectX) {
+            if (o.y < piece.y) minY = Math.max(minY, o.y + p2H);
+            if (o.y > piece.y) maxY = Math.min(maxY, o.y - piece.size);
+        }
+    });
+
+    gameState.dragBounds = { minX, maxX, minY, maxY };
 
     document.addEventListener('mousemove', dragMove);
     document.addEventListener('mouseup', endDrag);
@@ -245,46 +281,69 @@ function dragMove(e) {
     const moveX = Math.round(deltaX / cellW);
     const moveY = Math.round(deltaY / cellH);
 
-    let targetX = gameState.initialPiecePos.x;
-    let targetY = gameState.initialPiecePos.y;
+    let cellTargetX = gameState.initialPiecePos.x;
+    let cellTargetY = gameState.initialPiecePos.y;
 
-    // Constrain by Axis for vehicles
     if (p.type === 'pedestrian' || p.type === 'cyclist') {
-        targetX = gameState.initialPiecePos.x + moveX;
-        targetY = gameState.initialPiecePos.y + moveY;
+        cellTargetX = gameState.initialPiecePos.x + moveX;
+        cellTargetY = gameState.initialPiecePos.y + moveY;
     } else if (p.orient === 'H') {
-        targetX = gameState.initialPiecePos.x + moveX;
+        cellTargetX = gameState.initialPiecePos.x + moveX;
     } else if (p.orient === 'V') {
-        targetY = gameState.initialPiecePos.y + moveY;
+        cellTargetY = gameState.initialPiecePos.y + moveY;
     }
 
-    // Border constraints
-    const lvl = LEVELS.find(l => l.num === gameState.level);
-    let maxX = GRID_SIZE - (p.orient === 'H' ? p.size : 1);
-    const isExitRow = lvl && p.isMain && p.orient === 'H' && p.y === lvl.target.y;
-    
-    if (isExitRow) {
-        maxX = GRID_SIZE; // slide off rightwards!
+    // Border constraints for logic
+    if (p.orient === 'H' || p.orient === 'V') {
+        cellTargetX = Math.max(gameState.dragBounds.minX, Math.min(gameState.dragBounds.maxX, cellTargetX));
+        cellTargetY = Math.max(gameState.dragBounds.minY, Math.min(gameState.dragBounds.maxY, cellTargetY));
+    } else {
+        const lvl = LEVELS.find(l => l.num === gameState.level);
+        let maxXi = GRID_SIZE - (p.orient === 'H' ? p.size : 1);
+        const isExitRow = lvl && p.isMain && p.orient === 'H' && p.y === lvl.target.y;
+        if (isExitRow) maxXi = GRID_SIZE;
+        cellTargetX = Math.max(0, Math.min(maxXi, cellTargetX));
+        cellTargetY = Math.max(0, Math.min(GRID_SIZE - (p.orient === 'V' ? p.size : 1), cellTargetY));
     }
 
-    targetX = Math.max(0, Math.min(maxX, targetX));
-    targetY = Math.max(0, Math.min(GRID_SIZE - (p.orient === 'V' ? p.size : 1), targetY));
+    // Now for visual target
+    let visualTargetX = gameState.initialPiecePos.x;
+    let visualTargetY = gameState.initialPiecePos.y;
+
+    if (p.type === 'pedestrian' || p.type === 'cyclist') {
+        visualTargetX += (deltaX / cellW);
+        visualTargetY += (deltaY / cellH);
+    } else if (p.orient === 'H') {
+        visualTargetX += (deltaX / cellW);
+    } else if (p.orient === 'V') {
+        visualTargetY += (deltaY / cellH);
+    }
+
+    // Visual bounds
+    if (p.orient === 'H' || p.orient === 'V') {
+        visualTargetX = Math.max(gameState.dragBounds.minX, Math.min(gameState.dragBounds.maxX, visualTargetX));
+        visualTargetY = Math.max(gameState.dragBounds.minY, Math.min(gameState.dragBounds.maxY, visualTargetY));
+    } else {
+        const lvl = LEVELS.find(l => l.num === gameState.level);
+        let maxXi = GRID_SIZE - (p.orient === 'H' ? p.size : 1);
+        const isExitRow = lvl && p.isMain && p.orient === 'H' && p.y === lvl.target.y;
+        if (isExitRow) maxXi = GRID_SIZE;
+        visualTargetX = Math.max(0, Math.min(maxXi, visualTargetX));
+        visualTargetY = Math.max(0, Math.min(GRID_SIZE - (p.orient === 'V' ? p.size : 1), visualTargetY));
+    }
 
     // Continuous visual update
     const el = document.getElementById(p.id);
     if (el) {
-        el.style.left = `calc(${targetX * CELL_SIZE_PCT}% + 4px)`;
-        el.style.top = `calc(${targetY * CELL_SIZE_PCT}% + 4px)`;
+        el.style.left = `calc(${visualTargetX * CELL_SIZE_PCT}% + 4px)`;
+        el.style.top = `calc(${visualTargetY * CELL_SIZE_PCT}% + 4px)`;
     }
 
-    // Temporarily save to check path collision or just save position for validation on drop?
-    // In traditional Rush Hour, dragging blocks when it hits something.
-    // Simplifying: we only snap and check on drop to penalize stress.
-    gameState._tempX = targetX;
-    gameState._tempY = targetY;
+    gameState._tempX = cellTargetX;
+    gameState._tempY = cellTargetY;
     
     // Safety Zone highlights (Blue glow)
-    highlightSafetyZones(p, targetX, targetY);
+    highlightSafetyZones(p, cellTargetX, cellTargetY);
 }
 
 function endDrag() {
