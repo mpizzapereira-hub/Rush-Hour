@@ -202,10 +202,23 @@ const baseBoards = [
         { id: 'c1', type: 'car', x: 2, y: 2, orient: 'V', size: 2, color: '#FF0099' },
         { id: 'c2', type: 'car', x: 1, y: 4, orient: 'H', size: 2, color: '#11998e' },
         { id: 'c3', type: 'car', x: 4, y: 4, orient: 'V', size: 2, color: '#ccc' }
+    ],
+    [
+        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+        { id: 'b1', type: 'bus', x: 2, y: 0, orient: 'V', size: 3, color: '#f3f' },
+        { id: 'b2', type: 'bus', x: 3, y: 3, orient: 'V', size: 3, color: '#ffb' },
+        { id: 'c1', type: 'car', x: 4, y: 1, orient: 'H', size: 2, color: '#00e5ff' }
+    ],
+    [
+        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+        { id: 'c1', type: 'car', x: 2, y: 3, orient: 'V', size: 2, color: '#777' },
+        { id: 'c2', type: 'car', x: 3, y: 3, orient: 'V', size: 2, color: '#888' },
+        { id: 'c3', type: 'car', x: 4, y: 3, orient: 'V', size: 2, color: '#999' },
+        { id: 'c4', type: 'car', x: 2, y: 1, orient: 'H', size: 2, color: '#aaa' }
     ]
 ];
 
-for(let i=11; i<=34; i++) {
+for(let i=11; i<=59; i++) {
     let base = JSON.parse(JSON.stringify(baseBoards[i % baseBoards.length]));
     LEVELS.push({
         num: i,
@@ -219,15 +232,15 @@ for(let i=11; i<=34; i++) {
     });
 }
 
-// Fase 35 - A mega difícil e final
+// Fase 60 - O mega difícil e final
 LEVELS.push({
-    num: 35,
+    num: 60,
     title: "O Mega Engarrafamento Final",
     description: "Mostre que você é o verdadeiro mestre para ganhar o troféu!",
     target: { x: 5, y: 3 },
     zecaMessage: "É tudo ou nada. Um congestionamento de fechar as vias. Boa sorte!",
     event: { id: 'normal', title: 'Caos Total', desc: 'O maior desafio.', icon: 'ri-alert-line' },
-    theme: 'forest',
+    theme: 'city',
     pieces: [
         { id: 'main_car', type: 'car', x: 1, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
         { id: 'b1', type: 'bus', x: 0, y: 0, orient: 'V', size: 3, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
@@ -740,17 +753,6 @@ function checkWinCondition() {
 
     if (mainPiece.x + mainPiece.size - 1 >= lvl.target.x && mainPiece.y === lvl.target.y) { // reached target grid cell
         showWinModal();
-        
-        // Auto-advance level after 1.5 seconds without needing to click
-        setTimeout(() => {
-            overlayEl.style.display = 'none';
-            if (gameState.level < LEVELS.length) {
-                gameState.level++;
-            } else {
-                gameState.level = 1;
-            }
-            loadLevel(gameState.level);
-        }, 1500);
     }
 }
 
