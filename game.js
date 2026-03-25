@@ -165,20 +165,83 @@ const LEVELS = [
         event: { id: 'normal', title: 'Fluxo Normal', desc: 'Céu aberto.', icon: 'ri-sun-line' },
         theme: 'forest',
         pieces: [
-            { id: 'main_car', type: 'car', x: 1, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
-            { id: 'b1', type: 'bus', x: 0, y: 0, orient: 'V', size: 3, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
-            { id: 'c1', type: 'car', x: 1, y: 0, orient: 'H', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' },
-            { id: 'c2', type: 'car', x: 4, y: 0, orient: 'V', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' },
-            { id: 'c3', type: 'car', x: 5, y: 0, orient: 'V', size: 2, color: 'linear-gradient(135deg, #FF0099, #493240)' },
-            { id: 'c4', type: 'car', x: 1, y: 1, orient: 'V', size: 2, color: '#333' },
-            { id: 'c5', type: 'car', x: 2, y: 1, orient: 'H', size: 2, color: '#00e5ff' },
-            { id: 'b2', type: 'bus', x: 3, y: 2, orient: 'V', size: 3, color: '#f3f' },
-            { id: 'c6', type: 'car', x: 0, y: 4, orient: 'H', size: 2, color: '#2a2' },
-            { id: 'c7', type: 'car', x: 4, y: 4, orient: 'V', size: 2, color: '#13f' },
-            { id: 'c8', type: 'car', x: 2, y: 5, orient: 'H', size: 2, color: '#ccc' }
+            { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+            { id: 'b1', type: 'bus', x: 3, y: 1, orient: 'V', size: 3, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
+            { id: 'c1', type: 'car', x: 4, y: 3, orient: 'V', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' }
         ]
     }
 ];
+
+// Gerar mais 25 fases (11 a 35) progressivamente
+const baseBoards = [
+    [
+        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+        { id: 'b1', type: 'bus', x: 2, y: 1, orient: 'V', size: 3, color: '#f9d423' },
+        { id: 'c1', type: 'car', x: 3, y: 3, orient: 'V', size: 2, color: '#4776E6' },
+        { id: 'c2', type: 'car', x: 4, y: 0, orient: 'V', size: 2, color: '#11998e' }
+    ],
+    [
+        { id: 'main_car', type: 'car', x: 1, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+        { id: 'c1', type: 'car', x: 3, y: 2, orient: 'V', size: 2, color: '#FF0099' },
+        { id: 'c2', type: 'car', x: 4, y: 4, orient: 'H', size: 2, color: '#ccc' },
+        { id: 'b1', type: 'bus', x: 0, y: 0, orient: 'H', size: 3, color: '#f3f' }
+    ],
+    [
+        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+        { id: 'c1', type: 'car', x: 3, y: 3, orient: 'V', size: 2, color: '#2a2' },
+        { id: 'c2', type: 'car', x: 4, y: 4, orient: 'H', size: 2, color: '#00e5ff' },
+        { id: 'c3', type: 'car', x: 2, y: 0, orient: 'H', size: 2, color: '#ffb' }
+    ],
+    [
+        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+        { id: 'b1', type: 'bus', x: 3, y: 1, orient: 'V', size: 3, color: '#f9d423' },
+        { id: 'b2', type: 'bus', x: 1, y: 0, orient: 'V', size: 3, color: '#4776E6' }
+    ],
+    [
+        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+        { id: 'c1', type: 'car', x: 2, y: 2, orient: 'V', size: 2, color: '#FF0099' },
+        { id: 'c2', type: 'car', x: 1, y: 4, orient: 'H', size: 2, color: '#11998e' },
+        { id: 'c3', type: 'car', x: 4, y: 4, orient: 'V', size: 2, color: '#ccc' }
+    ]
+];
+
+for(let i=11; i<=34; i++) {
+    let base = JSON.parse(JSON.stringify(baseBoards[i % baseBoards.length]));
+    LEVELS.push({
+        num: i,
+        title: `Desafio ${i}`,
+        description: `Resolva o engarrafamento!`,
+        target: { x: 5, y: 3 },
+        zecaMessage: "Mais um nó no trânsito para desfazer.",
+        event: { id: 'normal', title: 'Fluxo Intenso', desc: 'Tráfego rodando.', icon: 'ri-car-line' },
+        theme: i % 2 === 0 ? 'city' : 'forest',
+        pieces: base
+    });
+}
+
+// Fase 35 - A mega difícil e final
+LEVELS.push({
+    num: 35,
+    title: "O Mega Engarrafamento Final",
+    description: "Mostre que você é o verdadeiro mestre para ganhar o troféu!",
+    target: { x: 5, y: 3 },
+    zecaMessage: "É tudo ou nada. Um congestionamento de fechar as vias. Boa sorte!",
+    event: { id: 'normal', title: 'Caos Total', desc: 'O maior desafio.', icon: 'ri-alert-line' },
+    theme: 'forest',
+    pieces: [
+        { id: 'main_car', type: 'car', x: 1, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+        { id: 'b1', type: 'bus', x: 0, y: 0, orient: 'V', size: 3, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
+        { id: 'c1', type: 'car', x: 1, y: 0, orient: 'H', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' },
+        { id: 'c2', type: 'car', x: 4, y: 0, orient: 'V', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' },
+        { id: 'c3', type: 'car', x: 5, y: 0, orient: 'V', size: 2, color: 'linear-gradient(135deg, #FF0099, #493240)' },
+        { id: 'c4', type: 'car', x: 1, y: 1, orient: 'V', size: 2, color: '#333' },
+        { id: 'c5', type: 'car', x: 2, y: 1, orient: 'H', size: 2, color: '#00e5ff' },
+        { id: 'b2', type: 'bus', x: 3, y: 2, orient: 'V', size: 3, color: '#f3f' },
+        { id: 'c6', type: 'car', x: 0, y: 4, orient: 'H', size: 2, color: '#2a2' },
+        { id: 'c7', type: 'car', x: 4, y: 4, orient: 'V', size: 2, color: '#13f' },
+        { id: 'c8', type: 'car', x: 2, y: 5, orient: 'H', size: 2, color: '#ccc' }
+    ]
+});
 
 // DOM Elements
 const gridContainer = document.getElementById('game-grid');
