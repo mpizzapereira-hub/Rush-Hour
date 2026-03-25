@@ -165,11 +165,17 @@ const LEVELS = [
         event: { id: 'normal', title: 'Fluxo Normal', desc: 'Céu aberto.', icon: 'ri-sun-line' },
         theme: 'forest',
         pieces: [
-            { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
-            { id: 'c10_1', type: 'bus', x: 2, y: 1, orient: 'V', size: 3, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
-            { id: 'c10_2', type: 'car', x: 3, y: 1, orient: 'H', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' },
-            { id: 'c10_3', type: 'bus', x: 4, y: 2, orient: 'V', size: 3, color: 'linear-gradient(135deg, #11998e, #38ef7d)' },
-            { id: 'c10_4', type: 'car', x: 1, y: 4, orient: 'H', size: 2, color: 'linear-gradient(135deg, #FF0099, #493240)' }
+            { id: 'main_car', type: 'car', x: 1, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+            { id: 'b1', type: 'bus', x: 0, y: 0, orient: 'V', size: 3, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
+            { id: 'c1', type: 'car', x: 1, y: 0, orient: 'H', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' },
+            { id: 'c2', type: 'car', x: 4, y: 0, orient: 'V', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' },
+            { id: 'c3', type: 'car', x: 5, y: 0, orient: 'V', size: 2, color: 'linear-gradient(135deg, #FF0099, #493240)' },
+            { id: 'c4', type: 'car', x: 1, y: 1, orient: 'V', size: 2, color: '#333' },
+            { id: 'c5', type: 'car', x: 2, y: 1, orient: 'H', size: 2, color: '#00e5ff' },
+            { id: 'b2', type: 'bus', x: 3, y: 2, orient: 'V', size: 3, color: '#f3f' },
+            { id: 'c6', type: 'car', x: 0, y: 4, orient: 'H', size: 2, color: '#2a2' },
+            { id: 'c7', type: 'car', x: 4, y: 4, orient: 'V', size: 2, color: '#13f' },
+            { id: 'c8', type: 'car', x: 2, y: 5, orient: 'H', size: 2, color: '#ccc' }
         ]
     }
 ];
@@ -264,7 +270,7 @@ function renderPieces() {
 
     gameState.pieces.forEach(p => {
         const div = document.createElement('div');
-        div.className = `piece piece-${p.type}`;
+        div.className = `piece piece-${p.type} orient-${p.orient}`;
         div.id = p.id;
         div.style.background = p.color;
         
@@ -687,8 +693,16 @@ function checkWinCondition() {
 
 function showWinModal() {
     overlayEl.style.display = 'flex';
-    modalTitleEl.textContent = "Fase Concluída!";
-    modalDescEl.textContent = "Você guiou o Pedestre com empatia.";
+    
+    if (gameState.level === LEVELS.length) {
+        modalTitleEl.innerHTML = "🏆 Vitória Épica!";
+        modalDescEl.textContent = "Você completou todos os níveis e provou ser o mestre do trânsito!";
+        document.getElementById('modal-icon').innerHTML = '<i class="ri-trophy-fill" style="color: gold; text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);"></i>';
+    } else {
+        modalTitleEl.textContent = "Fase Concluída!";
+        modalDescEl.textContent = "Você guiou o Carro com empatia.";
+        document.getElementById('modal-icon').innerHTML = '<i class="ri-checkbox-circle-line"></i>';
+    }
     
     let starCount = 1;
     if (gameState.empathy > 80) starCount = 3;
