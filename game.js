@@ -215,44 +215,76 @@ const baseBoards = [
         { id: 'c2', type: 'car', x: 3, y: 3, orient: 'V', size: 2, color: '#888' },
         { id: 'c3', type: 'car', x: 4, y: 3, orient: 'V', size: 2, color: '#999' },
         { id: 'c4', type: 'car', x: 2, y: 1, orient: 'H', size: 2, color: '#aaa' }
+    ],
+    // Novas variações para unicidade
+    [
+        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+        { id: 'b1', type: 'bus', x: 4, y: 1, orient: 'V', size: 3, color: '#ef4' },
+        { id: 'c1', type: 'car', x: 2, y: 2, orient: 'H', size: 2, color: '#44f' }
+    ],
+    [
+        { id: 'main_car', type: 'car', x: 1, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+        { id: 'c1', type: 'car', x: 3, y: 0, orient: 'V', size: 2, color: '#f44' },
+        { id: 'c2', type: 'car', x: 3, y: 4, orient: 'V', size: 2, color: '#4f4' }
+    ],
+    [
+        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+        { id: 'b1', type: 'bus', x: 2, y: 0, orient: 'V', size: 3, color: '#f9d' },
+        { id: 'b2', type: 'bus', x: 3, y: 0, orient: 'V', size: 3, color: '#9df' },
+        { id: 'c1', type: 'car', x: 4, y: 3, orient: 'H', size: 2, color: '#df9' }
+    ],
+    [
+        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+        { id: 'c1', type: 'car', x: 2, y: 4, orient: 'H', size: 2, color: '#555' },
+        { id: 'c2', type: 'car', x: 4, y: 2, orient: 'V', size: 3, color: '#99f' }
+    ],
+    [
+        { id: 'main_car', type: 'car', x: 2, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+        { id: 'b1', type: 'bus', x: 1, y: 1, orient: 'V', size: 3, color: '#ff5' },
+        { id: 'c1', type: 'car', x: 4, y: 0, orient: 'V', size: 2, color: '#f5f' }
     ]
 ];
 
+const colorPalette = ['#FF0099', '#4776E6', '#11998e', '#f9d423', '#ccc', '#00e5ff', '#ffbb00', '#f3f', '#2a2', '#13f', '#eb4d4b', '#6ab04c', '#7ed6df', '#e056fd', '#4834d4'];
+
 for(let i=11; i<=59; i++) {
     let base = JSON.parse(JSON.stringify(baseBoards[i % baseBoards.length]));
+    
+    // Unicidade: Mudar cores e IDs
+    base.forEach((p, idx) => {
+        if (!p.isMain) {
+            p.color = colorPalette[(i + idx) % colorPalette.length];
+            p.id = `ext_${i}_${idx}`;
+        }
+    });
+
     LEVELS.push({
         num: i,
         title: `Desafio ${i}`,
-        description: `Resolva o engarrafamento!`,
+        description: `Ambiente variado - Fase ${i}`,
         target: { x: 5, y: 3 },
-        zecaMessage: "Mais um nó no trânsito para desfazer.",
-        event: { id: 'normal', title: 'Fluxo Intenso', desc: 'Tráfego rodando.', icon: 'ri-car-line' },
-        theme: i % 2 === 0 ? 'city' : 'forest',
+        zecaMessage: "Uma nova configuração para o seu reflexo!",
+        event: { id: 'normal', title: 'Fluxo Estável', desc: 'Trânsito contínuo.', icon: 'ri-shuffle-line' },
+        theme: i % 3 === 0 ? 'city' : 'forest',
         pieces: base
     });
 }
 
-// Fase 60 - O mega difícil e final
+// Fase 60 - Vitória Facilitada e Equilibrada
 LEVELS.push({
     num: 60,
-    title: "O Mega Engarrafamento Final",
-    description: "Mostre que você é o verdadeiro mestre para ganhar o troféu!",
+    title: "O Grande Final",
+    description: "Você chegou ao fim da jornada. Libere o caminho uma última vez!",
     target: { x: 5, y: 3 },
-    zecaMessage: "É tudo ou nada. Um congestionamento de fechar as vias. Boa sorte!",
-    event: { id: 'normal', title: 'Caos Total', desc: 'O maior desafio.', icon: 'ri-alert-line' },
+    zecaMessage: "Este é o desafio final, mestre do trânsito!",
+    event: { id: 'normal', title: 'Vitória Próxima', desc: 'Sinta o troféu.', icon: 'ri-trophy-line' },
     theme: 'city',
     pieces: [
-        { id: 'main_car', type: 'car', x: 1, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
-        { id: 'b1', type: 'bus', x: 0, y: 0, orient: 'V', size: 3, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
-        { id: 'c1', type: 'car', x: 1, y: 0, orient: 'H', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' },
-        { id: 'c2', type: 'car', x: 4, y: 0, orient: 'V', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' },
-        { id: 'c3', type: 'car', x: 5, y: 0, orient: 'V', size: 2, color: 'linear-gradient(135deg, #FF0099, #493240)' },
-        { id: 'c4', type: 'car', x: 1, y: 1, orient: 'V', size: 2, color: '#333' },
-        { id: 'c5', type: 'car', x: 2, y: 1, orient: 'H', size: 2, color: '#00e5ff' },
-        { id: 'b2', type: 'bus', x: 3, y: 2, orient: 'V', size: 3, color: '#f3f' },
-        { id: 'c6', type: 'car', x: 0, y: 4, orient: 'H', size: 2, color: '#2a2' },
-        { id: 'c7', type: 'car', x: 4, y: 4, orient: 'V', size: 2, color: '#13f' },
-        { id: 'c8', type: 'car', x: 2, y: 5, orient: 'H', size: 2, color: '#ccc' }
+        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+        { id: 'final_b1', type: 'bus', x: 2, y: 1, orient: 'V', size: 3, color: '#f1c40f' },
+        { id: 'final_c1', type: 'car', x: 3, y: 0, orient: 'H', size: 2, color: '#e74c3c' },
+        { id: 'final_c2', type: 'car', x: 4, y: 3, orient: 'V', size: 2, color: '#3498db' },
+        { id: 'final_c3', type: 'car', x: 2, y: 4, orient: 'H', size: 2, color: '#2ecc71' }
     ]
 });
 
