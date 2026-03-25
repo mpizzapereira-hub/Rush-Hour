@@ -156,10 +156,10 @@ body.theme-city {
 }
 
 .traffic-grid {
-    height: 100%;
-    width: auto;
-    aspect-ratio: 1;
+    width: 65vh;
+    height: 65vh;
     max-width: 100%;
+    aspect-ratio: 1;
     background: rgba(0, 0, 0, 0.2);
     padding: 12px;
     border-radius: 16px;
