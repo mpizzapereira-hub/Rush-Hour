@@ -172,100 +172,118 @@ const LEVELS = [
     }
 ];
 
-// Gerar mais 25 fases (11 a 35) progressivamente
+// Gerar fases únicas de 11 a 59
 const baseBoards = [
-    [
-        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
-        { id: 'b1', type: 'bus', x: 2, y: 1, orient: 'V', size: 3, color: '#f9d423' },
-        { id: 'c1', type: 'car', x: 3, y: 3, orient: 'V', size: 2, color: '#4776E6' },
-        { id: 'c2', type: 'car', x: 4, y: 0, orient: 'V', size: 2, color: '#11998e' }
-    ],
-    [
-        { id: 'main_car', type: 'car', x: 1, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
-        { id: 'c1', type: 'car', x: 3, y: 2, orient: 'V', size: 2, color: '#FF0099' },
-        { id: 'c2', type: 'car', x: 4, y: 4, orient: 'H', size: 2, color: '#ccc' },
-        { id: 'b1', type: 'bus', x: 0, y: 0, orient: 'H', size: 3, color: '#f3f' }
-    ],
-    [
-        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
-        { id: 'c1', type: 'car', x: 3, y: 3, orient: 'V', size: 2, color: '#2a2' },
-        { id: 'c2', type: 'car', x: 4, y: 4, orient: 'H', size: 2, color: '#00e5ff' },
-        { id: 'c3', type: 'car', x: 2, y: 0, orient: 'H', size: 2, color: '#ffb' }
-    ],
-    [
-        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
-        { id: 'b1', type: 'bus', x: 3, y: 1, orient: 'V', size: 3, color: '#f9d423' },
-        { id: 'b2', type: 'bus', x: 1, y: 0, orient: 'V', size: 3, color: '#4776E6' }
-    ],
-    [
-        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
-        { id: 'c1', type: 'car', x: 2, y: 2, orient: 'V', size: 2, color: '#FF0099' },
-        { id: 'c2', type: 'car', x: 1, y: 4, orient: 'H', size: 2, color: '#11998e' },
-        { id: 'c3', type: 'car', x: 4, y: 4, orient: 'V', size: 2, color: '#ccc' }
-    ],
-    [
-        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
-        { id: 'b1', type: 'bus', x: 2, y: 0, orient: 'V', size: 3, color: '#f3f' },
-        { id: 'b2', type: 'bus', x: 3, y: 3, orient: 'V', size: 3, color: '#ffb' },
-        { id: 'c1', type: 'car', x: 4, y: 1, orient: 'H', size: 2, color: '#00e5ff' }
-    ],
-    [
-        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
-        { id: 'c1', type: 'car', x: 2, y: 3, orient: 'V', size: 2, color: '#777' },
-        { id: 'c2', type: 'car', x: 3, y: 3, orient: 'V', size: 2, color: '#888' },
-        { id: 'c3', type: 'car', x: 4, y: 3, orient: 'V', size: 2, color: '#999' },
-        { id: 'c4', type: 'car', x: 2, y: 1, orient: 'H', size: 2, color: '#aaa' }
-    ],
-    // Novas variações para unicidade
-    [
-        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
-        { id: 'b1', type: 'bus', x: 4, y: 1, orient: 'V', size: 3, color: '#ef4' },
-        { id: 'c1', type: 'car', x: 2, y: 2, orient: 'H', size: 2, color: '#44f' }
-    ],
-    [
-        { id: 'main_car', type: 'car', x: 1, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
-        { id: 'c1', type: 'car', x: 3, y: 0, orient: 'V', size: 2, color: '#f44' },
-        { id: 'c2', type: 'car', x: 3, y: 4, orient: 'V', size: 2, color: '#4f4' }
-    ],
-    [
-        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
-        { id: 'b1', type: 'bus', x: 2, y: 0, orient: 'V', size: 3, color: '#f9d' },
-        { id: 'b2', type: 'bus', x: 3, y: 0, orient: 'V', size: 3, color: '#9df' },
-        { id: 'c1', type: 'car', x: 4, y: 3, orient: 'H', size: 2, color: '#df9' }
-    ],
-    [
-        { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
-        { id: 'c1', type: 'car', x: 2, y: 4, orient: 'H', size: 2, color: '#555' },
-        { id: 'c2', type: 'car', x: 4, y: 2, orient: 'V', size: 3, color: '#99f' }
-    ],
-    [
-        { id: 'main_car', type: 'car', x: 2, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
-        { id: 'b1', type: 'bus', x: 1, y: 1, orient: 'V', size: 3, color: '#ff5' },
-        { id: 'c1', type: 'car', x: 4, y: 0, orient: 'V', size: 2, color: '#f5f' }
-    ]
+    // 11. Simples bloqueio vertical
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 2, orient: 'V', size: 2 }],
+    // 12. Ônibus bloqueando
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 3, y: 1, orient: 'V', size: 3 }],
+    // 13. Bloqueio duplo
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 3, orient: 'V', size: 2 }, { x: 4, y: 2, orient: 'V', size: 2 }],
+    // 14. Labirinto de carros
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 1, orient: 'V', size: 2 }, { x: 1, y: 0, orient: 'H', size: 2 }, { x: 3, y: 2, orient: 'V', size: 3 }],
+    // 15. O Gancho
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 3, orient: 'V', size: 2 }, { x: 3, y: 3, orient: 'V', size: 2 }, { x: 2, y: 5, orient: 'H', size: 2 }],
+    // 16. Colunas Alternadas
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 1, orient: 'V', size: 2 }, { x: 4, y: 3, orient: 'V', size: 2 }, { x: 3, y: 0, orient: 'V', size: 3 }],
+    // 17. Paredão (Solvável)
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 0, orient: 'V', size: 2 }, { x: 3, y: 1, orient: 'V', size: 2 }, { x: 4, y: 2, orient: 'V', size: 2 }],
+    // 18. Z-Shape
+    [{ x: 1, y: 3, orient: 'H', size: 2, isMain: true }, { x: 0, y: 1, orient: 'V', size: 2 }, { x: 1, y: 1, orient: 'H', size: 2 }, { x: 3, y: 2, orient: 'V', size: 3 }],
+    // 19. Diagonal
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 0, orient: 'V', size: 2 }, { x: 3, y: 1, orient: 'V', size: 2 }, { x: 4, y: 2, orient: 'V', size: 2 }],
+    // 20. Tunel
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 0, orient: 'V', size: 3 }, { x: 3, y: 4, orient: 'H', size: 3 }],
+    // 21. Desafio do Cruzamento (FIXED: Versão Solvável para Nível 21)
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 0, orient: 'V', size: 3 }, { x: 3, y: 1, orient: 'V', size: 3 }, { x: 4, y: 3, orient: 'V', size: 2 }],
+    // 22. Encurralado
+    [{ x: 1, y: 3, orient: 'H', size: 2, isMain: true }, { x: 0, y: 2, orient: 'V', size: 2 }, { x: 3, y: 2, orient: 'V', size: 2 }, { x: 4, y: 4, orient: 'H', size: 2 }],
+    // 23. Comboio
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 4, y: 1, orient: 'V', size: 2 }, { x: 4, y: 4, orient: 'V', size: 2 }, { x: 5, y: 1, orient: 'V', size: 2 }],
+    // 24. Pilares
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 0, orient: 'V', size: 3 }, { x: 3, y: 0, orient: 'V', size: 3 }, { x: 4, y: 0, orient: 'V', size: 3 }],
+    // 25. Saída Estreita
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 5, y: 0, orient: 'V', size: 2 }, { x: 4, y: 3, orient: 'V', size: 2 }, { x: 5, y: 4, orient: 'V', size: 2 }],
+    // 26. Manobra em L
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 4, orient: 'H', size: 2 }, { x: 3, y: 2, orient: 'V', size: 2 }, { x: 4, y: 0, orient: 'V', size: 3 }],
+    // 27. Labirinto Vertical
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 0, orient: 'V', size: 2 }, { x: 2, y: 2, orient: 'V', size: 2 }, { x: 2, y: 4, orient: 'V', size: 2 }],
+    // 28. O Bloqueio Triplo
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 3, y: 0, orient: 'V', size: 3 }, { x: 4, y: 1, orient: 'V', size: 3 }, { x: 5, y: 2, orient: 'V', size: 3 }],
+    // 29. Zigue-Zague
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 1, orient: 'V', size: 2 }, { x: 3, y: 3, orient: 'V', size: 2 }, { x: 4, y: 1, orient: 'V', size: 2 }],
+    // 30. Grande Tunel
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 0, orient: 'V', size: 3 }, { x: 2, y: 4, orient: 'H', size: 3 }, { x: 3, y: 1, orient: 'V', size: 3 }],
+    // 31. Shift Row 2
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 4, orient: 'H', size: 2 }, { x: 4, y: 4, orient: 'H', size: 2 }, { x: 3, y: 0, orient: 'V', size: 3 }],
+    // 32. Diagonal Inversa
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 4, y: 0, orient: 'V', size: 2 }, { x: 3, y: 1, orient: 'V', size: 2 }, { x: 2, y: 4, orient: 'V', size: 2 }],
+    // 33. Paredão Duplo
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 1, orient: 'V', size: 3 }, { x: 3, y: 2, orient: 'V', size: 3 }],
+    // 34. Labirinto H
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 1, y: 0, orient: 'H', size: 2 }, { x: 1, y: 5, orient: 'H', size: 2 }, { x: 3, y: 1, orient: 'V', size: 2 }],
+    // 35. Saída Central
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 3, y: 0, orient: 'V', size: 3 }, { x: 3, y: 4, orient: 'V', size: 2 }, { x: 5, y: 2, orient: 'V', size: 2 }],
+    // 36. O Quadrado
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 1, orient: 'H', size: 2 }, { x: 2, y: 2, orient: 'V', size: 2 }, { x: 3, y: 1, orient: 'V', size: 2 }],
+    // 37. Pilastras
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 0, orient: 'V', size: 2 }, { x: 3, y: 1, orient: 'V', size: 2 }, { x: 4, y: 0, orient: 'V', size: 2 }, { x: 5, y: 1, orient: 'V', size: 2 }],
+    // 38. Comboio Longo
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 0, orient: 'V', size: 3 }, { x: 3, y: 0, orient: 'V', size: 3 }, { x: 4, y: 0, orient: 'V', size: 2 }, { x: 5, y: 4, orient: 'V', size: 2 }],
+    // 39. Labirinto Cruzado
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 1, orient: 'V', size: 2 }, { x: 1, y: 0, orient: 'H', size: 2 }, { x: 4, y: 2, orient: 'V', size: 3 }, { x: 3, y: 5, orient: 'H', size: 2 }],
+    // 40. Saída em U
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 3, orient: 'V', size: 3 }, { x: 3, y: 5, orient: 'H', size: 2 }, { x: 4, y: 3, orient: 'V', size: 3 }],
+    // 41. Pilares Alternados
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 0, orient: 'V', size: 3 }, { x: 4, y: 3, orient: 'V', size: 3 }, { x: 3, y: 0, orient: 'V', size: 2 }],
+    // 42. O Grande Nó 2
+    [{ x: 1, y: 3, orient: 'H', size: 2, isMain: true }, { x: 0, y: 0, orient: 'V', size: 2 }, { x: 1, y: 0, orient: 'H', size: 2 }, { x: 3, y: 0, orient: 'V', size: 3 }, { x: 4, y: 4, orient: 'H', size: 2 }],
+    // 43. Tunel Estreito
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 1, orient: 'V', size: 3 }, { x: 3, y: 0, orient: 'V', size: 2 }, { x: 4, y: 1, orient: 'V', size: 3 }],
+    // 44. Bloqueio em X
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 2, orient: 'V', size: 3 }, { x: 4, y: 2, orient: 'V', size: 3 }, { x: 3, y: 0, orient: 'H', size: 2 }, { x: 3, y: 5, orient: 'H', size: 2 }],
+    // 45. Paredão Final
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 3, orient: 'V', size: 2 }, { x: 3, y: 3, orient: 'V', size: 2 }, { x: 4, y: 3, orient: 'V', size: 2 }, { x: 5, y: 3, orient: 'V', size: 2 }],
+    // 46. Labirinto do Zeca
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 1, y: 1, orient: 'V', size: 2 }, { x: 2, y: 0, orient: 'H', size: 2 }, { x: 4, y: 1, orient: 'V', size: 3 }, { x: 3, y: 4, orient: 'H', size: 2 }],
+    // 47. Diagonal Mestra
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 1, y: 4, orient: 'V', size: 2 }, { x: 2, y: 3, orient: 'V', size: 2 }, { x: 3, y: 2, orient: 'V', size: 2 }, { x: 4, y: 1, orient: 'V', size: 2 }],
+    // 48. Tunel de Ônibus
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 0, orient: 'V', size: 3 }, { x: 3, y: 0, orient: 'V', size: 3 }, { x: 4, y: 0, orient: 'V', size: 3 }, { x: 5, y: 0, orient: 'V', size: 3 }],
+    // 49. Saída Complexa
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 3, y: 1, orient: 'V', size: 3 }, { x: 4, y: 1, orient: 'V', size: 3 }, { x: 5, y: 1, orient: 'V', size: 2 }, { x: 2, y: 4, orient: 'H', size: 3 }],
+    // 50. O Grande Desafio
+    [{ x: 0, y: 3, orient: 'H', size: 2, isMain: true }, { x: 2, y: 0, orient: 'V', size: 2 }, { x: 2, y: 3, orient: 'V', size: 3 }, { x: 3, y: 0, orient: 'V', size: 3 }, { x: 4, y: 0, orient: 'V', size: 3 }, { x: 5, y: 4, orient: 'H', size: 2 }]
 ];
 
 const colorPalette = ['#FF0099', '#4776E6', '#11998e', '#f9d423', '#ccc', '#00e5ff', '#ffbb00', '#f3f', '#2a2', '#13f', '#eb4d4b', '#6ab04c', '#7ed6df', '#e056fd', '#4834d4'];
 
 for(let i=11; i<=59; i++) {
-    let base = JSON.parse(JSON.stringify(baseBoards[i % baseBoards.length]));
+    // Pegar base (sem repetição cíclica direta enquanto houver bases novas)
+    let baseData = baseBoards[(i-11) % baseBoards.length];
+    let base = JSON.parse(JSON.stringify(baseData));
     
     // Unicidade: Mudar cores e IDs
     base.forEach((p, idx) => {
-        if (!p.isMain) {
-            p.color = colorPalette[(i + idx) % colorPalette.length];
-            p.id = `ext_${i}_${idx}`;
+        p.id = `ext_${i}_${idx}`;
+        if (p.isMain) {
+            p.id = 'main_car';
+            p.type = 'car';
+            p.color = 'linear-gradient(135deg, #ff416c, #ff4b2b)';
+        } else {
+            p.type = p.size === 3 ? 'bus' : 'car';
+            p.color = colorPalette[(i * 7 + idx) % colorPalette.length];
         }
     });
 
     LEVELS.push({
         num: i,
-        title: `Desafio ${i}`,
-        description: `Ambiente variado - Fase ${i}`,
+        title: `Nível ${i}`,
+        description: `Desafio Urbano #${i}`,
         target: { x: 5, y: 3 },
-        zecaMessage: "Uma nova configuração para o seu reflexo!",
-        event: { id: 'normal', title: 'Fluxo Estável', desc: 'Trânsito contínuo.', icon: 'ri-shuffle-line' },
-        theme: i % 3 === 0 ? 'city' : 'forest',
+        zecaMessage: "Observe os movimentos e limpe a via!",
+        event: { id: 'normal', title: 'Fluxo Estável', desc: 'Trânsito contínuo e equilibrado.', icon: 'ri-arrow-left-right-line' },
+        theme: i % 2 === 0 ? 'city' : 'forest',
         pieces: base
     });
 }
@@ -282,9 +300,8 @@ LEVELS.push({
     pieces: [
         { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
         { id: 'final_b1', type: 'bus', x: 2, y: 1, orient: 'V', size: 3, color: '#f1c40f' },
-        { id: 'final_c1', type: 'car', x: 3, y: 0, orient: 'H', size: 2, color: '#e74c3c' },
-        { id: 'final_c2', type: 'car', x: 4, y: 3, orient: 'V', size: 2, color: '#3498db' },
-        { id: 'final_c3', type: 'car', x: 2, y: 4, orient: 'H', size: 2, color: '#2ecc71' }
+        { id: 'final_c1', type: 'car', x: 3, y: 2, orient: 'V', size: 2, color: '#e74c3c' },
+        { id: 'final_c2', type: 'car', x: 4, y: 3, orient: 'V', size: 2, color: '#3498db' }
     ]
 });
 
