@@ -23,6 +23,7 @@ const LEVELS = [
         target: { x: 5, y: 3 },
         zecaMessage: "Mova os veículos no seu eixo para abrir caminho ao Carro Vermelho!",
         event: { id: 'normal', title: 'Fluxo Normal', desc: 'Dia ensolarado. Tráfego padrão.', icon: 'ri-sun-line' },
+        theme: 'forest',
         pieces: [
             { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
             { id: 'car1', type: 'car', x: 2, y: 1, orient: 'V', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' },
@@ -36,6 +37,7 @@ const LEVELS = [
         target: { x: 5, y: 2 },
         zecaMessage: "Abra caminho para o carro principal deslizando o ônibus!",
         event: { id: 'rain', title: 'Dia de Chuva', desc: 'Pista escorregadia. Distância de segurança dobrada!', icon: 'ri-rainy-line' },
+        theme: 'city',
         pieces: [
             { id: 'main_car', type: 'car', x: 0, y: 2, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
             { id: 'bus1', type: 'bus', x: 3, y: 0, orient: 'V', size: 3, isMain: false, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
@@ -51,6 +53,7 @@ const LEVELS = [
         zecaMessage: "Remova os entulhos da fenda para restaurar o fluxo livre ao seu Carro!",
         event: { id: 'maintenance', title: 'Pista Limpa', desc: 'Reparo na pista. Proibido parar na junção.', icon: 'ri-hammer-line' },
         isBroken: true,
+        theme: 'forest',
         pieces: [
             { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
             { id: 'deb1', type: 'debris', x: 2, y: 3, orient: 'V', size: 1, color: 'linear-gradient(135deg, #444, #666)' },
@@ -66,6 +69,7 @@ const LEVELS = [
         target: { x: 5, y: 3 },
         zecaMessage: "Vários carros se bloqueando em círculo. Mova o azul primeiro!",
         event: { id: 'normal', title: 'Fluxo Normal', desc: 'Dia ensolarado. Tráfego padrão.', icon: 'ri-sun-line' },
+        theme: 'city',
         pieces: [
             { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
             { id: 'car1_4', type: 'car', x: 2, y: 2, orient: 'V', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' },
@@ -82,12 +86,90 @@ const LEVELS = [
         target: { x: 5, y: 2 },
         zecaMessage: "Dois comboios de ônibus bloqueados! Planeje seus movimentos.",
         event: { id: 'rain', title: 'Dia de Chuva', desc: 'Pista escorregadia. Distância de segurança dobrada!', icon: 'ri-rainy-line' },
+        theme: 'city',
         pieces: [
             { id: 'main_car', type: 'car', x: 0, y: 2, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
             { id: 'bus1_5', type: 'bus', x: 2, y: 0, orient: 'V', size: 3, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
             { id: 'bus2_5', type: 'bus', x: 3, y: 1, orient: 'V', size: 3, color: 'linear-gradient(135deg, #ffbb00, #ff8c00)' },
             { id: 'car1_5', type: 'car', x: 1, y: 3, orient: 'H', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' },
             { id: 'car2_5', type: 'car', x: 3, y: 4, orient: 'H', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' }
+        ]
+    },
+    {
+        num: 6,
+        title: "Paz na Floresta",
+        description: "Aproveite a tranquilidade antes da tempestade.",
+        target: { x: 5, y: 3 },
+        zecaMessage: "Muitos veículos menores aqui, mas o caminho é acessível.",
+        event: { id: 'normal', title: 'Fluxo Normal', desc: 'Clima agradável na floresta.', icon: 'ri-sun-line' },
+        theme: 'forest',
+        pieces: [
+            { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+            { id: 'c6_1', type: 'car', x: 2, y: 2, orient: 'V', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' },
+            { id: 'c6_2', type: 'car', x: 3, y: 3, orient: 'V', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' },
+            { id: 'c6_3', type: 'bus', x: 4, y: 0, orient: 'V', size: 3, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' }
+        ]
+    },
+    {
+        num: 7,
+        title: "Manobra Urbana",
+        description: "Um ônibus atrapalha o fluxo na cidade.",
+        target: { x: 5, y: 2 },
+        zecaMessage: "O ônibus longo precisa sair da frente para o Red passar.",
+        event: { id: 'rain', title: 'Chuva na Cidade', desc: 'Pista escorregadia. Cuidado extra!', icon: 'ri-rainy-line' },
+        theme: 'city',
+        pieces: [
+            { id: 'main_car', type: 'car', x: 1, y: 2, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+            { id: 'c7_1', type: 'bus', x: 3, y: 1, orient: 'V', size: 3, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
+            { id: 'c7_2', type: 'car', x: 1, y: 3, orient: 'H', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' },
+            { id: 'c7_3', type: 'car', x: 4, y: 4, orient: 'H', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' }
+        ]
+    },
+    {
+        num: 8,
+        title: "Caminho Estreito",
+        description: "Veículos pesados bloqueiam a passagem na floresta.",
+        target: { x: 5, y: 3 },
+        zecaMessage: "Limpe uma das faixas para liberar o tráfego.",
+        event: { id: 'normal', title: 'Fluxo Normal', desc: 'Dia ensolarado.', icon: 'ri-sun-line' },
+        theme: 'forest',
+        pieces: [
+            { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+            { id: 'c8_1', type: 'bus', x: 2, y: 0, orient: 'V', size: 3, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
+            { id: 'c8_2', type: 'bus', x: 3, y: 1, orient: 'V', size: 3, color: 'linear-gradient(135deg, #ffbb00, #ff8c00)' },
+            { id: 'c8_3', type: 'car', x: 4, y: 4, orient: 'V', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' }
+        ]
+    },
+    {
+        num: 9,
+        title: "Cruzamento Crítico",
+        description: "Trânsito de todos os lados.",
+        target: { x: 5, y: 2 },
+        zecaMessage: "Mova os veículos na ordem correta, destrave o cruzamento.",
+        event: { id: 'maintenance', title: 'Reparo na Pista', desc: 'Atenção aos bloqueios.', icon: 'ri-hammer-line' },
+        theme: 'city',
+        pieces: [
+            { id: 'main_car', type: 'car', x: 0, y: 2, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+            { id: 'c9_1', type: 'car', x: 2, y: 1, orient: 'V', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' },
+            { id: 'c9_2', type: 'car', x: 3, y: 2, orient: 'V', size: 2, color: 'linear-gradient(135deg, #11998e, #38ef7d)' },
+            { id: 'c9_3', type: 'car', x: 1, y: 3, orient: 'H', size: 2, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
+            { id: 'c9_4', type: 'car', x: 4, y: 0, orient: 'V', size: 2, color: 'linear-gradient(135deg, #FF0099, #493240)' }
+        ]
+    },
+    {
+        num: 10,
+        title: "A Última Saída",
+        description: "Engarrafamento total, mostre sua habilidade.",
+        target: { x: 5, y: 3 },
+        zecaMessage: "Um quebra-cabeça mestre para sair da floresta!",
+        event: { id: 'normal', title: 'Fluxo Normal', desc: 'Céu aberto.', icon: 'ri-sun-line' },
+        theme: 'forest',
+        pieces: [
+            { id: 'main_car', type: 'car', x: 0, y: 3, orient: 'H', size: 2, isMain: true, color: 'linear-gradient(135deg, #ff416c, #ff4b2b)' },
+            { id: 'c10_1', type: 'bus', x: 2, y: 1, orient: 'V', size: 3, color: 'linear-gradient(135deg, #f9d423, #ff4e50)' },
+            { id: 'c10_2', type: 'car', x: 3, y: 1, orient: 'H', size: 2, color: 'linear-gradient(135deg, #4776E6, #8E54E9)' },
+            { id: 'c10_3', type: 'bus', x: 4, y: 2, orient: 'V', size: 3, color: 'linear-gradient(135deg, #11998e, #38ef7d)' },
+            { id: 'c10_4', type: 'car', x: 1, y: 4, orient: 'H', size: 2, color: 'linear-gradient(135deg, #FF0099, #493240)' }
         ]
     }
 ];
@@ -128,6 +210,9 @@ function loadLevel(levelNum) {
     gameState.stress = 0;
     gameState.empathy = 100;
     gameState.activeEvent = lvl.event.id;
+
+    // Apply level theme to body
+    document.body.className = `theme-${lvl.theme || 'city'}`;
 
     // Update UI
     levelNumberEl.textContent = String(levelNum).padStart(2, '0');
@@ -439,11 +524,11 @@ function validateMove(piece, curX, curY) {
     }
 
     // 2. Safety Zone Check (Zeca Farol Rule)
-    // "Nenhum veículo motorizado pode terminar seu movimento ocupando o quadrado imediatamente à frente ou atrás de outro elemento."
+    // Disabled to allow authentic Rush Hour physics
     if (piece.type === 'car' || piece.type === 'bus') {
         const isSafe = checkSafetyDistance(piece, curX, curY);
         if (!isSafe) {
-            return false; // Violates safety
+            // We just let it silently violate safety! No block.
         }
     }
 
